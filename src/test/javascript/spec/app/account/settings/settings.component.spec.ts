@@ -87,7 +87,7 @@ describe('Settings Component', () => {
 
   it('should notify of error upon error 400', async () => {
     // GIVEN
-    const error = { response: { status: 400, data: {} } };
+    const error = { response: { status: 400 } };
     mockedAxios.post.mockReturnValue(Promise.reject(error));
 
     // WHEN

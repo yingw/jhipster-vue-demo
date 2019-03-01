@@ -3,28 +3,28 @@
         <div class="col-8">
             <div v-if="department">
                 <h2><span v-text="$t('demoApp.department.detail.title')">Department</span> {{department.id}}</h2>
+                <!--<jhi-alert-error></jhi-alert-error>-->
                 <dl class="row jh-entity-details">
-                    <dt>
-                        <span v-text="$t('demoApp.department.departmentName')">Department Name</span>
-                    </dt>
-                    <dd>
-                        <span>{{department.departmentName}}</span>
-                    </dd>
-                    <dt>
-                        <span v-text="$t('demoApp.department.location')">Location</span>
-                    </dt>
-                    <dd>
-                        <div v-if="department.location">
-                            <router-link :to="{name: 'LocationView', params: {locationId: department.location.id}}">{{department.location.id}}</router-link>
-                        </div>
-                    </dd>
+
+                        <dt><span v-text="$t('demoApp.department.departmentName')">Department Name</span></dt>
+                        <dd>
+                                <span>{{department.departmentName}}</span>
+                        </dd>
+
+                        <dt><span v-text="$t('demoApp.department.location')">Location</span></dt>
+                        <dd>
+                                        <div v-if="department.location">
+                                            <router-link :to="'../location/' + department.location.id + '/View'">{{department.location.id}}</router-link>
+                                        </div>
+                        </dd>
                 </dl>
                 <button type="submit"
                         v-on:click.prevent="previousState()"
                         class="btn btn-info">
                     <font-awesome-icon icon="arrow-left"></font-awesome-icon>&nbsp;<span v-text="$t('entity.action.back')"> Back</span>
                 </button>
-                <router-link v-if="department.id" :to="{name: 'DepartmentEdit', params: {departmentId: department.id}}" tag="button" class="btn btn-primary">
+
+                <router-link :to="{name: 'DepartmentEdit', params: {departmentId: department.id}}" tag="button" class="btn btn-primary">
                     <font-awesome-icon icon="pencil-alt"></font-awesome-icon>&nbsp;<span v-text="$t('entity.action.edit')"> Edit</span>
                 </router-link>
             </div>
@@ -34,3 +34,4 @@
 
 <script lang="ts" src="./department-details.component.ts">
 </script>
+

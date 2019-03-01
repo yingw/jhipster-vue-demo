@@ -1,10 +1,8 @@
 import { Component, Inject, Vue } from 'vue-property-decorator';
 import UserManagementService from './user-management.service';
-import AlertService from '@/shared/alert/alert.service';
 
 @Component
 export default class JhiUserManagementComponent extends Vue {
-  @Inject('alertService') private alertService: () => AlertService;
   @Inject('userService') private userManagementService: () => UserManagementService;
   public error = '';
   public success = '';
@@ -17,23 +15,6 @@ export default class JhiUserManagementComponent extends Vue {
   public reverse = false;
   public totalItems = 0;
   public removeId: number = null;
-
-  public dismissCountDown: number = this.$store.getters.dismissCountDown;
-  public dismissSecs: number = this.$store.getters.dismissSecs;
-  public alertType: string = this.$store.getters.alertType;
-  public alertMessage: any = this.$store.getters.alertMessage;
-
-  public getAlertFromStore() {
-    this.dismissCountDown = this.$store.getters.dismissCountDown;
-    this.dismissSecs = this.$store.getters.dismissSecs;
-    this.alertType = this.$store.getters.alertType;
-    this.alertMessage = this.$store.getters.alertMessage;
-  }
-
-  public countDownChanged(dismissCountDown: number) {
-    this.alertService().countDownChanged(dismissCountDown);
-    this.getAlertFromStore();
-  }
 
   public mounted(): void {
     this.loadAll();
@@ -96,10 +77,7 @@ export default class JhiUserManagementComponent extends Vue {
   public deleteUser(): void {
     this.userManagementService()
       .remove(this.removeId)
-      .then(res => {
-        const message = this.$t(res.headers['x-demoapp-alert'], { param: res.headers['x-demoapp-params'] });
-        this.alertService().showAlert(message, 'danger');
-        this.getAlertFromStore();
+      .then(() => {
         this.removeId = null;
         this.loadAll();
       });

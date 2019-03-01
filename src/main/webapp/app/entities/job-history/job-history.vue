@@ -2,7 +2,7 @@
     <div>
         <h2 id="page-heading">
             <span v-text="$t('demoApp.jobHistory.home.title')" id="job-history-heading">Job Histories</span>
-            <router-link :to="{name: 'JobHistoryCreate'}" tag="button" id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-job-history">
+            <router-link to="/entity/job-history/new" tag="button" id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-job-history">
                 <font-awesome-icon icon="plus"></font-awesome-icon>
                 <span  v-text="$t('demoApp.jobHistory.home.createLabel')">
                     Create new JobHistory
@@ -22,39 +22,37 @@
                 <thead>
                 <tr>
                     <th v-on:click="changeOrder('id')"><span v-text="$t('global.field.id')">ID</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
-                    <th v-on:click="changeOrder('startDate')"><span v-text="$t('demoApp.jobHistory.startDate')">Start Date</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
-                    <th v-on:click="changeOrder('endDate')"><span v-text="$t('demoApp.jobHistory.endDate')">End Date</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
-                    <th v-on:click="changeOrder('language')"><span v-text="$t('demoApp.jobHistory.language')">Language</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
-                    <th v-on:click="changeOrder('job.id')"><span v-text="$t('demoApp.jobHistory.job')">Job</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
-                    <th v-on:click="changeOrder('department.id')"><span v-text="$t('demoApp.jobHistory.department')">Department</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
-                    <th v-on:click="changeOrder('employee.id')"><span v-text="$t('demoApp.jobHistory.employee')">Employee</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                        <th v-on:click="changeOrder('startDate')"><span v-text="$t('demoApp.jobHistory.startDate')">Start Date</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                        <th v-on:click="changeOrder('endDate')"><span v-text="$t('demoApp.jobHistory.endDate')">End Date</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                        <th v-on:click="changeOrder('language')"><span v-text="$t('demoApp.jobHistory.language')">Language</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                            <th v-on:click="changeOrder('job.id')"><span v-text="$t('demoApp.jobHistory.job')">Job</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                            <th v-on:click="changeOrder('department.id')"><span v-text="$t('demoApp.jobHistory.department')">Department</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                            <th v-on:click="changeOrder('employee.id')"><span v-text="$t('demoApp.jobHistory.employee')">Employee</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
                     <th></th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr v-for="jobHistory of orderBy(jobHistories, propOrder, reverse === true ? 1 : -1)"
                     :key="jobHistory.id">
-                    <td>
-                        <router-link :to="{name: 'JobHistoryView', params: {jobHistoryId: jobHistory.id}}">{{jobHistory.id}}</router-link>
-                    </td>
-                    <td>{{jobHistory.startDate | formatDate}}</td>
-                    <td>{{jobHistory.endDate | formatDate}}</td>
-                    <td v-text="$t('demoApp.Language.' + jobHistory.language)">{{jobHistory.language}}</td>
-                    <td>
-                        <div v-if="jobHistory.job">
-                            <router-link :to="{name: 'JobView', params: {jobId: jobHistory.job.id}}">{{jobHistory.job.id}}</router-link>
-                        </div>
-                    </td>
-                    <td>
-                        <div v-if="jobHistory.department">
-                            <router-link :to="{name: 'DepartmentView', params: {departmentId: jobHistory.department.id}}">{{jobHistory.department.id}}</router-link>
-                        </div>
-                    </td>
-                    <td>
-                        <div v-if="jobHistory.employee">
-                            <router-link :to="{name: 'EmployeeView', params: {employeeId: jobHistory.employee.id}}">{{jobHistory.employee.id}}</router-link>
-                        </div>
-                    </td>
+                    <td><router-link :to="{name: 'JobHistoryView', params: {jobHistoryId: jobHistory.id}}">{{jobHistory.id}}</router-link></td>
+                            <td>{{jobHistory.startDate | formatDate}}</td>
+                            <td>{{jobHistory.endDate | formatDate}}</td>
+                            <td v-text="$t('demoApp.Language.' + jobHistory.language)">{{jobHistory.language}}</td>
+                        <td>
+                                        <div v-if="jobHistory.job">
+                                            <router-link :to="'../entity/job/' + jobHistory.job.id + '/view'" >{{jobHistory.job.id}}</router-link>
+                                        </div>
+                        </td>
+                        <td>
+                                        <div v-if="jobHistory.department">
+                                            <router-link :to="'../entity/department/' + jobHistory.department.id + '/view'" >{{jobHistory.department.id}}</router-link>
+                                        </div>
+                        </td>
+                        <td>
+                                        <div v-if="jobHistory.employee">
+                                            <router-link :to="'../entity/employee/' + jobHistory.employee.id + '/view'" >{{jobHistory.employee.id}}</router-link>
+                                        </div>
+                        </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <router-link :to="{name: 'JobHistoryView', params: {jobHistoryId: jobHistory.id}}" tag="button" class="btn btn-info btn-sm">

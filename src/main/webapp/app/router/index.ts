@@ -10,8 +10,7 @@ const Home = () => import('../core/home/home.vue');
 const Error = () => import('../core/error/error.vue');
 const Register = () => import('../account/register/register.vue');
 const Activate = () => import('../account/activate/activate.vue');
-const ResetPasswordInit = () => import('../account/reset-password/init/reset-password-init.vue');
-const ResetPasswordFinish = () => import('../account/reset-password/finish/reset-password-finish.vue');
+const ResetPassword = () => import('../account/reset-password/reset-password.vue');
 const ChangePassword = () => import('../account/change-password/change-password.vue');
 const Settings = () => import('../account/settings/settings.vue');
 const JhiUserManagementComponent = () => import('../admin/user-management/user-management.vue');
@@ -107,21 +106,17 @@ export default new Router({
       component: Activate
     },
     {
-      path: '/reset/request',
-      name: 'ResetPasswordInit',
-      component: ResetPasswordInit
-    },
-    {
-      path: '/reset/finish',
-      name: 'ResetPasswordFinish',
-      component: ResetPasswordFinish
+      path: '/resetPassword',
+      name: 'ResetPassword',
+      component: ResetPassword
     },
     {
       path: '/account/password',
       name: 'ChangePassword',
       component: ChangePassword,
       meta: { authorities: ['ROLE_USER'] }
-    },
+    }
+,
     {
       path: '/account/settings',
       name: 'Settings',
@@ -189,205 +184,45 @@ export default new Router({
       meta: { authorities: ['ROLE_ADMIN'] }
     }
     ,
-    {
-      path: '/entity/region',
-      name: 'Region',
-      component: Region,
-      meta: { authorities: ['ROLE_USER'] }
-    },
-    {
-      path: '/entity/region/new',
-      name: 'RegionCreate',
-      component: RegionUpdate,
-      meta: { authorities: ['ROLE_USER'] }
-    },
-    {
-      path: '/entity/region/:regionId/edit',
-      name: 'RegionEdit',
-      component: RegionUpdate,
-      meta: { authorities: ['ROLE_USER'] }
-    },
-    {
-      path: '/entity/region/:regionId/view',
-      name: 'RegionView',
-      component: RegionDetails,
-      meta: { authorities: ['ROLE_USER'] }
-    }
+  { path: '/entity/region', name: 'Region', component: Region, meta: { authorities: ['ROLE_USER'] } },
+  { path: '/entity/region/new', name: 'RegionCreate', component: RegionUpdate, meta: { authorities: ['ROLE_USER'] } },
+  { path: '/entity/region/:regionId/edit', name: 'RegionEdit', component: RegionUpdate, meta: { authorities: ['ROLE_USER'] } },
+  { path: '/entity/region/:regionId/view', name: 'RegionView', component: RegionDetails, meta: { authorities: ['ROLE_USER'] } }
     ,
-    {
-      path: '/entity/country',
-      name: 'Country',
-      component: Country,
-      meta: { authorities: ['ROLE_USER'] }
-    },
-    {
-      path: '/entity/country/new',
-      name: 'CountryCreate',
-      component: CountryUpdate,
-      meta: { authorities: ['ROLE_USER'] }
-    },
-    {
-      path: '/entity/country/:countryId/edit',
-      name: 'CountryEdit',
-      component: CountryUpdate,
-      meta: { authorities: ['ROLE_USER'] }
-    },
-    {
-      path: '/entity/country/:countryId/view',
-      name: 'CountryView',
-      component: CountryDetails,
-      meta: { authorities: ['ROLE_USER'] }
-    }
+  { path: '/entity/country', name: 'Country', component: Country, meta: { authorities: ['ROLE_USER'] } },
+  { path: '/entity/country/new', name: 'CountryCreate', component: CountryUpdate, meta: { authorities: ['ROLE_USER'] } },
+  { path: '/entity/country/:countryId/edit', name: 'CountryEdit', component: CountryUpdate, meta: { authorities: ['ROLE_USER'] } },
+  { path: '/entity/country/:countryId/view', name: 'CountryView', component: CountryDetails, meta: { authorities: ['ROLE_USER'] } }
     ,
-    {
-      path: '/entity/location',
-      name: 'Location',
-      component: Location,
-      meta: { authorities: ['ROLE_USER'] }
-    },
-    {
-      path: '/entity/location/new',
-      name: 'LocationCreate',
-      component: LocationUpdate,
-      meta: { authorities: ['ROLE_USER'] }
-    },
-    {
-      path: '/entity/location/:locationId/edit',
-      name: 'LocationEdit',
-      component: LocationUpdate,
-      meta: { authorities: ['ROLE_USER'] }
-    },
-    {
-      path: '/entity/location/:locationId/view',
-      name: 'LocationView',
-      component: LocationDetails,
-      meta: { authorities: ['ROLE_USER'] }
-    }
+  { path: '/entity/location', name: 'Location', component: Location, meta: { authorities: ['ROLE_USER'] } },
+  { path: '/entity/location/new', name: 'LocationCreate', component: LocationUpdate, meta: { authorities: ['ROLE_USER'] } },
+  { path: '/entity/location/:locationId/edit', name: 'LocationEdit', component: LocationUpdate, meta: { authorities: ['ROLE_USER'] } },
+  { path: '/entity/location/:locationId/view', name: 'LocationView', component: LocationDetails, meta: { authorities: ['ROLE_USER'] } }
     ,
-    {
-      path: '/entity/department',
-      name: 'Department',
-      component: Department,
-      meta: { authorities: ['ROLE_USER'] }
-    },
-    {
-      path: '/entity/department/new',
-      name: 'DepartmentCreate',
-      component: DepartmentUpdate,
-      meta: { authorities: ['ROLE_USER'] }
-    },
-    {
-      path: '/entity/department/:departmentId/edit',
-      name: 'DepartmentEdit',
-      component: DepartmentUpdate,
-      meta: { authorities: ['ROLE_USER'] }
-    },
-    {
-      path: '/entity/department/:departmentId/view',
-      name: 'DepartmentView',
-      component: DepartmentDetails,
-      meta: { authorities: ['ROLE_USER'] }
-    }
+  { path: '/entity/department', name: 'Department', component: Department, meta: { authorities: ['ROLE_USER'] } },
+  { path: '/entity/department/new', name: 'DepartmentCreate', component: DepartmentUpdate, meta: { authorities: ['ROLE_USER'] } },
+  { path: '/entity/department/:departmentId/edit', name: 'DepartmentEdit', component: DepartmentUpdate, meta: { authorities: ['ROLE_USER'] } },
+  { path: '/entity/department/:departmentId/view', name: 'DepartmentView', component: DepartmentDetails, meta: { authorities: ['ROLE_USER'] } }
     ,
-    {
-      path: '/entity/task',
-      name: 'Task',
-      component: Task,
-      meta: { authorities: ['ROLE_USER'] }
-    },
-    {
-      path: '/entity/task/new',
-      name: 'TaskCreate',
-      component: TaskUpdate,
-      meta: { authorities: ['ROLE_USER'] }
-    },
-    {
-      path: '/entity/task/:taskId/edit',
-      name: 'TaskEdit',
-      component: TaskUpdate,
-      meta: { authorities: ['ROLE_USER'] }
-    },
-    {
-      path: '/entity/task/:taskId/view',
-      name: 'TaskView',
-      component: TaskDetails,
-      meta: { authorities: ['ROLE_USER'] }
-    }
+  { path: '/entity/task', name: 'Task', component: Task, meta: { authorities: ['ROLE_USER'] } },
+  { path: '/entity/task/new', name: 'TaskCreate', component: TaskUpdate, meta: { authorities: ['ROLE_USER'] } },
+  { path: '/entity/task/:taskId/edit', name: 'TaskEdit', component: TaskUpdate, meta: { authorities: ['ROLE_USER'] } },
+  { path: '/entity/task/:taskId/view', name: 'TaskView', component: TaskDetails, meta: { authorities: ['ROLE_USER'] } }
     ,
-    {
-      path: '/entity/employee',
-      name: 'Employee',
-      component: Employee,
-      meta: { authorities: ['ROLE_USER'] }
-    },
-    {
-      path: '/entity/employee/new',
-      name: 'EmployeeCreate',
-      component: EmployeeUpdate,
-      meta: { authorities: ['ROLE_USER'] }
-    },
-    {
-      path: '/entity/employee/:employeeId/edit',
-      name: 'EmployeeEdit',
-      component: EmployeeUpdate,
-      meta: { authorities: ['ROLE_USER'] }
-    },
-    {
-      path: '/entity/employee/:employeeId/view',
-      name: 'EmployeeView',
-      component: EmployeeDetails,
-      meta: { authorities: ['ROLE_USER'] }
-    }
+  { path: '/entity/employee', name: 'Employee', component: Employee, meta: { authorities: ['ROLE_USER'] } },
+  { path: '/entity/employee/new', name: 'EmployeeCreate', component: EmployeeUpdate, meta: { authorities: ['ROLE_USER'] } },
+  { path: '/entity/employee/:employeeId/edit', name: 'EmployeeEdit', component: EmployeeUpdate, meta: { authorities: ['ROLE_USER'] } },
+  { path: '/entity/employee/:employeeId/view', name: 'EmployeeView', component: EmployeeDetails, meta: { authorities: ['ROLE_USER'] } }
     ,
-    {
-      path: '/entity/job',
-      name: 'Job',
-      component: Job,
-      meta: { authorities: ['ROLE_USER'] }
-    },
-    {
-      path: '/entity/job/new',
-      name: 'JobCreate',
-      component: JobUpdate,
-      meta: { authorities: ['ROLE_USER'] }
-    },
-    {
-      path: '/entity/job/:jobId/edit',
-      name: 'JobEdit',
-      component: JobUpdate,
-      meta: { authorities: ['ROLE_USER'] }
-    },
-    {
-      path: '/entity/job/:jobId/view',
-      name: 'JobView',
-      component: JobDetails,
-      meta: { authorities: ['ROLE_USER'] }
-    }
+  { path: '/entity/job', name: 'Job', component: Job, meta: { authorities: ['ROLE_USER'] } },
+  { path: '/entity/job/new', name: 'JobCreate', component: JobUpdate, meta: { authorities: ['ROLE_USER'] } },
+  { path: '/entity/job/:jobId/edit', name: 'JobEdit', component: JobUpdate, meta: { authorities: ['ROLE_USER'] } },
+  { path: '/entity/job/:jobId/view', name: 'JobView', component: JobDetails, meta: { authorities: ['ROLE_USER'] } }
     ,
-    {
-      path: '/entity/job-history',
-      name: 'JobHistory',
-      component: JobHistory,
-      meta: { authorities: ['ROLE_USER'] }
-    },
-    {
-      path: '/entity/job-history/new',
-      name: 'JobHistoryCreate',
-      component: JobHistoryUpdate,
-      meta: { authorities: ['ROLE_USER'] }
-    },
-    {
-      path: '/entity/job-history/:jobHistoryId/edit',
-      name: 'JobHistoryEdit',
-      component: JobHistoryUpdate,
-      meta: { authorities: ['ROLE_USER'] }
-    },
-    {
-      path: '/entity/job-history/:jobHistoryId/view',
-      name: 'JobHistoryView',
-      component: JobHistoryDetails,
-      meta: { authorities: ['ROLE_USER'] }
-    }
+  { path: '/entity/job-history', name: 'JobHistory', component: JobHistory, meta: { authorities: ['ROLE_USER'] } },
+  { path: '/entity/job-history/new', name: 'JobHistoryCreate', component: JobHistoryUpdate, meta: { authorities: ['ROLE_USER'] } },
+  { path: '/entity/job-history/:jobHistoryId/edit', name: 'JobHistoryEdit', component: JobHistoryUpdate, meta: { authorities: ['ROLE_USER'] } },
+  { path: '/entity/job-history/:jobHistoryId/view', name: 'JobHistoryView', component: JobHistoryDetails, meta: { authorities: ['ROLE_USER'] } }
     // jhipster-needle-add-entity-to-router - JHipster will add entities to the router here
   ]
 });

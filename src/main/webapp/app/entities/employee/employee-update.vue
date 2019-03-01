@@ -4,11 +4,13 @@
             <form name="editForm" role="form" novalidate v-on:submit.prevent="save()" >
                 <h2 id="demoApp.employee.home.createOrEditLabel" v-text="$t('demoApp.employee.home.createOrEditLabel')">Create or edit a Employee</h2>
                 <div>
+                    <!--<jhi-alert-error></jhi-alert-error>-->
                     <div class="form-group" v-if="employee.id">
                         <label for="id" v-text="$t('global.field.id')">ID</label>
                         <input type="text" class="form-control" id="id" name="id"
                                v-model="employee.id" readonly />
                     </div>
+
                     <div class="form-group">
                         <label class="form-control-label" v-text="$t('demoApp.employee.firstName')" for="employee-firstName">First Name</label>
                         <input type="text" class="form-control" name="firstName" id="employee-firstName"
@@ -32,7 +34,7 @@
                     <div class="form-group">
                         <label class="form-control-label" v-text="$t('demoApp.employee.hireDate')" for="employee-hireDate">Hire Date</label>
                         <div class="d-flex">
-                            <input id="employee-hireDate" type="datetime-local" class="form-control" name="hireDate" :class="{'valid': !$v.employee.hireDate.$invalid, 'invalid': $v.employee.hireDate.$invalid }"
+                            <input id="employee-hireDate" type="datetime-local" class="form-control" name="hireDate" :class="{'valid': !$v.employee.hireDate.$invalid, 'invalid': $v.employee.hireDate.$invalid }" 
                             
                             :value="convertDateTimeFromServer($v.employee.hireDate.$model)"
                             @change="updateInstantField('hireDate', $event)"/>
@@ -48,20 +50,22 @@
                         <input type="number" class="form-control" name="commissionPct" id="employee-commissionPct"
                             :class="{'valid': !$v.employee.commissionPct.$invalid, 'invalid': $v.employee.commissionPct.$invalid }" v-model="$v.employee.commissionPct.$model" />
                     </div>
-                    <div class="form-group">
-                        <label class="form-control-label" v-bind:value="$t('demoApp.employee.department')" for="employee-department">Department</label>
-                        <select class="form-control" id="employee-department" name="department" v-model="employee.department" >
-                            <option v-bind:value="null"></option>
-                            <option v-bind:value="employee.department && departmentOption.id === employee.department.id ? employee.department : departmentOption" v-for="departmentOption in departments" :key="departmentOption.id">{{departmentOption.id}}</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-control-label" v-bind:value="$t('demoApp.employee.manager')" for="employee-manager">Manager</label>
-                        <select class="form-control" id="employee-manager" name="manager" v-model="employee.manager" >
-                            <option v-bind:value="null"></option>
-                            <option v-bind:value="employee.manager && employeeOption.id === employee.manager.id ? employee.manager : employeeOption" v-for="employeeOption in employees" :key="employeeOption.id">{{employeeOption.id}}</option>
-                        </select>
-                    </div>
+
+                        <div class="form-group">
+                            <label class="form-control-label" v-bind:value="$t('demoApp.employee.department')" for="employee-department">Department</label>
+                                <select class="form-control" id="employee-department" name="department" v-model="employee.department" >
+                                    <option value="null"></option>
+                                    <option v-bind:value="employee.department && departmentOption.id === employee.department.id ? employee.department : departmentOption" v-for="departmentOption in departments">{{departmentOption.id}}</option>
+                                </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-control-label" v-bind:value="$t('demoApp.employee.manager')" for="employee-manager">Manager</label>
+                                <select class="form-control" id="employee-manager" name="manager" v-model="employee.manager" >
+                                    <option value="null"></option>
+                                    <option v-bind:value="employee.manager && employeeOption.id === employee.manager.id ? employee.manager : employeeOption" v-for="employeeOption in employees">{{employeeOption.id}}</option>
+                                </select>
+                        </div>
+
                 </div>
                 <div>
                     <button type="button" id="cancel-save" class="btn btn-secondary" v-on:click="previousState()">

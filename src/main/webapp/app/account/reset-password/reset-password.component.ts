@@ -21,7 +21,7 @@ interface ResetAccount {
 @Component({
   validations
 })
-export default class ResetPasswordInit extends Vue {
+export default class ResetPassword extends Vue {
   public success: boolean = null;
   public error: string = null;
   public errorEmailNotExists: string = null;
@@ -30,8 +30,6 @@ export default class ResetPasswordInit extends Vue {
   };
 
   public requestReset(): void {
-    this.errorEmailNotExists = null;
-    this.error = null;
     axios
       .post('api/account/reset-password/init', this.resetAccount.email, {
         headers: {

@@ -1,8 +1,8 @@
 import { createLocalVue, shallowMount, Wrapper } from '@vue/test-utils';
 import axios from 'axios';
 import * as config from '@/shared/config/config';
-import ResetPasswordInit from '@/account/reset-password/init/reset-password-init.vue';
-import ResetPasswordInitClass from '@/account/reset-password/init/reset-password-init.component';
+import ResetPassword from '@/account/reset-password/reset-password.vue';
+import ResetPasswordClass from '@/account/reset-password/reset-password.component';
 import { EMAIL_NOT_FOUND_TYPE } from '@/constants';
 
 const localVue = createLocalVue();
@@ -16,17 +16,17 @@ jest.mock('axios', () => ({
   post: jest.fn()
 }));
 
-describe('Reset Component Init', () => {
-  let wrapper: Wrapper<ResetPasswordInitClass>;
-  let resetPasswordInit: ResetPasswordInitClass;
+describe('Reset Component', () => {
+  let wrapper: Wrapper<ResetPasswordClass>;
+  let resetPassword: ResetPasswordClass;
 
   beforeEach(() => {
     mockedAxios.post.mockReset();
-    wrapper = shallowMount<ResetPasswordInitClass>(ResetPasswordInit, {
+    wrapper = shallowMount<ResetPasswordClass>(ResetPassword, {
       i18n,
       localVue
     });
-    resetPasswordInit = wrapper.vm;
+    resetPassword = wrapper.vm;
   });
 
   it('should be a Vue instance', () => {
@@ -38,10 +38,10 @@ describe('Reset Component Init', () => {
     mockedAxios.post.mockReturnValue(Promise.resolve());
 
     // When
-    await resetPasswordInit.requestReset();
+    await resetPassword.requestReset();
 
     // Then
-    expect(resetPasswordInit.success).toBeTruthy();
+    expect(resetPassword.success).toBeTruthy();
   });
 
   it('should reset request fail as an error', async () => {
@@ -58,12 +58,12 @@ describe('Reset Component Init', () => {
     );
 
     // When
-    resetPasswordInit.requestReset();
-    await resetPasswordInit.$nextTick();
+    resetPassword.requestReset();
+    await resetPassword.$nextTick();
 
     // Then
-    expect(resetPasswordInit.success).toBeNull();
-    expect(resetPasswordInit.error).toEqual('ERROR');
+    expect(resetPassword.success).toBeNull();
+    expect(resetPassword.error).toEqual('ERROR');
   });
 
   it('should reset request fail as an email not existing error', async () => {
@@ -80,11 +80,11 @@ describe('Reset Component Init', () => {
     );
 
     // When
-    resetPasswordInit.requestReset();
-    await resetPasswordInit.$nextTick();
+    resetPassword.requestReset();
+    await resetPassword.$nextTick();
 
     // Then
-    expect(resetPasswordInit.success).toBeNull();
-    expect(resetPasswordInit.errorEmailNotExists).toEqual('ERROR');
+    expect(resetPassword.success).toBeNull();
+    expect(resetPassword.errorEmailNotExists).toEqual('ERROR');
   });
 });

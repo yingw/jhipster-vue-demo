@@ -29,11 +29,9 @@ export default class DepartmentUpdate extends Vue {
   public department: IDepartment = new Department();
 
   @Inject('locationService') private locationService: () => LocationService;
-
   public locations: ILocation[] = [];
 
   @Inject('employeeService') private employeeService: () => EmployeeService;
-
   public employees: IEmployee[] = [];
   public isSaving = false;
 

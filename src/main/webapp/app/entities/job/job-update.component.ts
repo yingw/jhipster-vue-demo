@@ -29,11 +29,9 @@ export default class JobUpdate extends Vue {
   public job: IJob = new Job();
 
   @Inject('employeeService') private employeeService: () => EmployeeService;
-
   public employees: IEmployee[] = [];
 
   @Inject('taskService') private taskService: () => TaskService;
-
   public tasks: ITask[] = [];
   public isSaving = false;
 
@@ -44,10 +42,6 @@ export default class JobUpdate extends Vue {
       }
       vm.initRelationships();
     });
-  }
-
-  created(): void {
-    this.job.tasks = [];
   }
 
   public save(): void {

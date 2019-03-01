@@ -25,7 +25,6 @@ export default class TaskUpdate extends Vue {
   public task: ITask = new Task();
 
   @Inject('jobService') private jobService: () => JobService;
-
   public jobs: IJob[] = [];
   public isSaving = false;
 

@@ -9,8 +9,6 @@ import CountryUpdateComponent from '@/entities/country/country-update.vue';
 import CountryClass from '@/entities/country/country-update.component';
 import CountryService from '@/entities/country/country.service';
 
-import RegionService from '@/entities/region/region.service';
-
 const localVue = createLocalVue();
 const mockedAxios: any = axios;
 
@@ -42,9 +40,7 @@ describe('Component Tests', () => {
         router,
         provide: {
           alertService: () => new AlertService(store),
-          countryService: () => new CountryService(),
-
-          regionService: () => new RegionService()
+          countryService: () => new CountryService()
         }
       });
       comp = wrapper.vm;

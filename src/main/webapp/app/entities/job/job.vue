@@ -2,7 +2,7 @@
     <div>
         <h2 id="page-heading">
             <span v-text="$t('demoApp.job.home.title')" id="job-heading">Jobs</span>
-            <router-link :to="{name: 'JobCreate'}" tag="button" id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-job">
+            <router-link to="/entity/job/new" tag="button" id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-job">
                 <font-awesome-icon icon="plus"></font-awesome-icon>
                 <span  v-text="$t('demoApp.job.home.createLabel')">
                     Create new Job
@@ -22,27 +22,25 @@
                 <thead>
                 <tr>
                     <th v-on:click="changeOrder('id')"><span v-text="$t('global.field.id')">ID</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
-                    <th v-on:click="changeOrder('jobTitle')"><span v-text="$t('demoApp.job.jobTitle')">Job Title</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
-                    <th v-on:click="changeOrder('minSalary')"><span v-text="$t('demoApp.job.minSalary')">Min Salary</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
-                    <th v-on:click="changeOrder('maxSalary')"><span v-text="$t('demoApp.job.maxSalary')">Max Salary</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
-                    <th v-on:click="changeOrder('employee.id')"><span v-text="$t('demoApp.job.employee')">Employee</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                        <th v-on:click="changeOrder('jobTitle')"><span v-text="$t('demoApp.job.jobTitle')">Job Title</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                        <th v-on:click="changeOrder('minSalary')"><span v-text="$t('demoApp.job.minSalary')">Min Salary</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                        <th v-on:click="changeOrder('maxSalary')"><span v-text="$t('demoApp.job.maxSalary')">Max Salary</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                            <th v-on:click="changeOrder('employee.id')"><span v-text="$t('demoApp.job.employee')">Employee</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
                     <th></th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr v-for="job of orderBy(jobs, propOrder, reverse === true ? 1 : -1)"
                     :key="job.id">
-                    <td>
-                        <router-link :to="{name: 'JobView', params: {jobId: job.id}}">{{job.id}}</router-link>
-                    </td>
-                    <td>{{job.jobTitle}}</td>
-                    <td>{{job.minSalary}}</td>
-                    <td>{{job.maxSalary}}</td>
-                    <td>
-                        <div v-if="job.employee">
-                            <router-link :to="{name: 'EmployeeView', params: {employeeId: job.employee.id}}">{{job.employee.id}}</router-link>
-                        </div>
-                    </td>
+                    <td><router-link :to="{name: 'JobView', params: {jobId: job.id}}">{{job.id}}</router-link></td>
+                            <td>{{job.jobTitle}}</td>
+                            <td>{{job.minSalary}}</td>
+                            <td>{{job.maxSalary}}</td>
+                        <td>
+                                        <div v-if="job.employee">
+                                            <router-link :to="'../entity/employee/' + job.employee.id + '/view'" >{{job.employee.id}}</router-link>
+                                        </div>
+                        </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <router-link :to="{name: 'JobView', params: {jobId: job.id}}" tag="button" class="btn btn-info btn-sm">

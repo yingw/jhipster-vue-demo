@@ -2,7 +2,7 @@
     <div>
         <h2 id="page-heading">
             <span v-text="$t('demoApp.task.home.title')" id="task-heading">Tasks</span>
-            <router-link :to="{name: 'TaskCreate'}" tag="button" id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-task">
+            <router-link to="/entity/task/new" tag="button" id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-task">
                 <font-awesome-icon icon="plus"></font-awesome-icon>
                 <span  v-text="$t('demoApp.task.home.createLabel')">
                     Create new Task
@@ -22,19 +22,17 @@
                 <thead>
                 <tr>
                     <th><span v-text="$t('global.field.id')">ID</span></th>
-                    <th><span v-text="$t('demoApp.task.title')">Title</span></th>
-                    <th><span v-text="$t('demoApp.task.description')">Description</span></th>
+                        <th><span v-text="$t('demoApp.task.title')">Title</span></th>
+                        <th><span v-text="$t('demoApp.task.description')">Description</span></th>
                     <th></th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr v-for="task in tasks"
                     :key="task.id">
-                    <td>
-                        <router-link :to="{name: 'TaskView', params: {taskId: task.id}}">{{task.id}}</router-link>
-                    </td>
-                    <td>{{task.title}}</td>
-                    <td>{{task.description}}</td>
+                    <td><router-link :to="{name: 'TaskView', params: {taskId: task.id}}">{{task.id}}</router-link></td>
+                            <td>{{task.title}}</td>
+                            <td>{{task.description}}</td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <router-link :to="{name: 'TaskView', params: {taskId: task.id}}" tag="button" class="btn btn-info btn-sm">

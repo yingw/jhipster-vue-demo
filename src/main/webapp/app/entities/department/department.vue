@@ -2,7 +2,7 @@
     <div>
         <h2 id="page-heading">
             <span v-text="$t('demoApp.department.home.title')" id="department-heading">Departments</span>
-            <router-link :to="{name: 'DepartmentCreate'}" tag="button" id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-department">
+            <router-link to="/entity/department/new" tag="button" id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-department">
                 <font-awesome-icon icon="plus"></font-awesome-icon>
                 <span  v-text="$t('demoApp.department.home.createLabel')">
                     Create new Department
@@ -22,23 +22,21 @@
                 <thead>
                 <tr>
                     <th><span v-text="$t('global.field.id')">ID</span></th>
-                    <th><span v-text="$t('demoApp.department.departmentName')">Department Name</span></th>
-                    <th><span v-text="$t('demoApp.department.location')">Location</span></th>
+                        <th><span v-text="$t('demoApp.department.departmentName')">Department Name</span></th>
+                            <th><span v-text="$t('demoApp.department.location')">Location</span></th>
                     <th></th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr v-for="department in departments"
                     :key="department.id">
-                    <td>
-                        <router-link :to="{name: 'DepartmentView', params: {departmentId: department.id}}">{{department.id}}</router-link>
-                    </td>
-                    <td>{{department.departmentName}}</td>
-                    <td>
-                        <div v-if="department.location">
-                            <router-link :to="{name: 'LocationView', params: {locationId: department.location.id}}">{{department.location.id}}</router-link>
-                        </div>
-                    </td>
+                    <td><router-link :to="{name: 'DepartmentView', params: {departmentId: department.id}}">{{department.id}}</router-link></td>
+                            <td>{{department.departmentName}}</td>
+                        <td>
+                                        <div v-if="department.location">
+                                            <router-link :to="'../entity/location/' + department.location.id + '/view'" >{{department.location.id}}</router-link>
+                                        </div>
+                        </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <router-link :to="{name: 'DepartmentView', params: {departmentId: department.id}}" tag="button" class="btn btn-info btn-sm">

@@ -31,7 +31,7 @@
                     <dt><span v-text="$t('userManagement.profiles')">Profiles</span></dt>
                     <dd>
                         <ul class="list-unstyled">
-                            <li v-for="authority of user.authorities" :key="authority">
+                            <li v-for="authority of user.authorities">
                                 <b-badge variant="info">{{authority}}</b-badge>
                             </li>
                         </ul>

@@ -4,7 +4,7 @@
       "packageName": "cn.wilmar.demo",
       "nativeLanguage": "zh-cn"
     },
-    "jhipsterVersion": "5.8.1",
+    "jhipsterVersion": "5.8.2",
     "applicationType": "monolith",
     "baseName": "Demo",
     "packageName": "cn.wilmar.demo",
@@ -30,7 +30,7 @@
     "otherModules": [
       {
         "name": "generator-jhipster-vuejs",
-        "version": "1.0.0-beta.1"
+        "version": "0.0.4"
       }
     ],
     "enableTranslation": true,
@@ -41,12 +41,12 @@
       "en"
     ],
     "blueprint": "generator-jhipster-vuejs",
-    "blueprintVersion": "1.0.0-beta.1"
+    "blueprintVersion": "0.0.4"
   },
   "generator-jhipster-vuejs": {
     "clientTheme": "sandstone",
     "clientThemeVariant": "primary",
-    "jhipsterVersion": "5.8.1",
+    "jhipsterVersion": "5.8.2",
     "applicationType": "monolith",
     "baseName": "Demo",
     "clientFramework": "vue",

@@ -1,16 +1,20 @@
 import { Component, Inject, Vue } from 'vue-property-decorator';
+import axios from 'axios';
 import { VERSION } from '@/constants';
-import LoginService from '@/account/login.service';
+import LoginModalService from '@/account/login-modal.service';
+
 import AccountService from '@/account/account.service';
 import TranslationService from '@/locale/translation.service';
 
 @Component
 export default class JhiNavbar extends Vue {
-  @Inject('loginService') private loginService: () => LoginService;
+  @Inject('loginModalService') private loginModalService: () => LoginModalService;
+
   @Inject('translationService') private translationService: () => TranslationService;
 
   @Inject('accountService') private accountService: () => AccountService;
   public version = VERSION ? 'v' + VERSION : '';
+  public isNavbarCollapsed = true;
   private currentLanguage = this.$store.getters.currentLanguage;
   private languages: any = this.$store.getters.languages;
 
@@ -23,6 +27,14 @@ export default class JhiNavbar extends Vue {
     return paths.some(path => {
       return this.$route.path.indexOf(path) === 0; // current path starts with this path string
     });
+  }
+
+  public getImageUrl(): boolean {
+    return false;
+  }
+
+  public collapseNavbar(): void {
+    this.isNavbarCollapsed = true;
   }
 
   public changeLanguage(newLanguage: string): void {
@@ -41,7 +53,7 @@ export default class JhiNavbar extends Vue {
   }
 
   public openLogin(): void {
-    this.loginService().openLogin((<any>this).$root);
+    this.loginModalService().openLogin((<any>this).$root);
   }
 
   public get authenticated(): boolean {

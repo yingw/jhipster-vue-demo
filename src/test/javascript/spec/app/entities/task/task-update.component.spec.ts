@@ -9,8 +9,6 @@ import TaskUpdateComponent from '@/entities/task/task-update.vue';
 import TaskClass from '@/entities/task/task-update.component';
 import TaskService from '@/entities/task/task.service';
 
-import JobService from '@/entities/job/job.service';
-
 const localVue = createLocalVue();
 const mockedAxios: any = axios;
 
@@ -42,9 +40,7 @@ describe('Component Tests', () => {
         router,
         provide: {
           alertService: () => new AlertService(store),
-          taskService: () => new TaskService(),
-
-          jobService: () => new JobService()
+          taskService: () => new TaskService()
         }
       });
       comp = wrapper.vm;

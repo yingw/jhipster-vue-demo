@@ -35,15 +35,12 @@ export default class JobHistoryUpdate extends Vue {
   public jobHistory: IJobHistory = new JobHistory();
 
   @Inject('jobService') private jobService: () => JobService;
-
   public jobs: IJob[] = [];
 
   @Inject('departmentService') private departmentService: () => DepartmentService;
-
   public departments: IDepartment[] = [];
 
   @Inject('employeeService') private employeeService: () => EmployeeService;
-
   public employees: IEmployee[] = [];
   public isSaving = false;
 
@@ -107,6 +104,13 @@ export default class JobHistoryUpdate extends Vue {
       .find(jobHistoryId)
       .then(res => {
         this.jobHistory = res;
+
+        if (this.jobHistory.startDate) {
+          this.jobHistory.startDate = parse(this.jobHistory.startDate.toString(), INSTANT_FORMAT, new Date());
+        }
+        if (this.jobHistory.endDate) {
+          this.jobHistory.endDate = parse(this.jobHistory.endDate.toString(), INSTANT_FORMAT, new Date());
+        }
       });
   }
 

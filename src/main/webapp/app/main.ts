@@ -12,10 +12,10 @@ import HealthService from './admin/health/health.service';
 import MetricsService from './admin/metrics/metrics.service';
 import LogsService from './admin/logs/logs.service';
 import ActivateService from './account/activate/activate.service';
+import LoginModalService from './account/login-modal.service';
 import RegisterService from './account/register/register.service';
 import UserManagementService from '@/admin/user-management/user-management.service';
 
-import LoginService from './account/login.service';
 import AccountService from './account/account.service';
 
 import '../content/scss/vendor.scss';
@@ -34,18 +34,29 @@ import JobHistoryService from '@/entities/job-history/job-history.service';
 // jhipster-needle-add-entity-service-to-main-import - JHipster will import entities services here
 
 Vue.config.productionTip = false;
-config.initVueApp(Vue);
-config.initFortAwesome(Vue);
-bootstrapVueConfig.initBootstrapVue(Vue);
-Vue.component('font-awesome-icon', FontAwesomeIcon);
-Vue.component('jhi-item-count', JhiItemCountComponent);
 
 const i18n = config.initI18N(Vue);
 const store = config.initVueXStore(Vue);
 
 const alertService = new AlertService(store);
 const translationService = new TranslationService(store, i18n);
-const loginService = new LoginService();
+config.initVueApp(Vue);
+config.initFortAwesome(Vue);
+bootstrapVueConfig.initBootstrapVue(Vue);
+Vue.component('font-awesome-icon', FontAwesomeIcon);
+Vue.component('jhi-item-count', JhiItemCountComponent);
+
+const activateService = new ActivateService();
+const loginModalService = new LoginModalService();
+const registerService = new RegisterService();
+const userManagementService = new UserManagementService();
+
+const auditsService = new AuditsService();
+const healthService = new HealthService();
+const metricsService = new MetricsService();
+const configurationService = new ConfigurationService();
+const logsService = new LogsService();
+
 const accountService = new AccountService(store, translationService, router);
 
 router.beforeEach((to, from, next) => {
@@ -66,6 +77,16 @@ router.beforeEach((to, from, next) => {
   }
 });
 
+const regionService = new RegionService();
+const countryService = new CountryService();
+const locationService = new LocationService();
+const departmentService = new DepartmentService();
+const taskService = new TaskService();
+const employeeService = new EmployeeService();
+const jobService = new JobService();
+const jobHistoryService = new JobHistoryService();
+// jhipster-needle-add-entity-service-to-main-declaration - JHipster will declare entities services here
+
 /* tslint:disable */
 new Vue({
   el: '#app',
@@ -73,29 +94,30 @@ new Vue({
   template: '<App/>',
   router,
   provide: {
-    loginService: () => loginService,
-    activateService: () => new ActivateService(),
-    registerService: () => new RegisterService(),
-    userService: () => new UserManagementService(),
+    activateService: () => activateService,
+    loginModalService: () => loginModalService,
+    registerService: () => registerService,
+    userService: () => userManagementService,
 
-    auditsService: () => new AuditsService(),
-    healthService: () => new HealthService(),
+    auditsService: () => auditsService,
+    healthService: () => healthService,
 
-    configurationService: () => new ConfigurationService(),
-    logsService: () => new LogsService(),
-    metricsService: () => new MetricsService(),
+    configurationService: () => configurationService,
+    logsService: () => logsService,
+    metricsService: () => metricsService,
     alertService: () => alertService,
     translationService: () => translationService,
-    regionService: () => new RegionService(),
-    countryService: () => new CountryService(),
-    locationService: () => new LocationService(),
-    departmentService: () => new DepartmentService(),
-    taskService: () => new TaskService(),
-    employeeService: () => new EmployeeService(),
-    jobService: () => new JobService(),
-    jobHistoryService: () => new JobHistoryService(),
+    accountService: () => accountService,
+
+    regionService: () => regionService,
+    countryService: () => countryService,
+    locationService: () => locationService,
+    departmentService: () => departmentService,
+    taskService: () => taskService,
+    employeeService: () => employeeService,
+    jobService: () => jobService,
+    jobHistoryService: () => jobHistoryService
     // jhipster-needle-add-entity-service-to-main - JHipster will import entities services here
-    accountService: () => accountService
   },
   i18n,
   store

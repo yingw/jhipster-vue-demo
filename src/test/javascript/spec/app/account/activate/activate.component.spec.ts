@@ -5,7 +5,7 @@ import * as config from '@/shared/config/config';
 import Activate from '@/account/activate/activate.vue';
 import ActivateClass from '@/account/activate/activate.component';
 import ActivateService from '@/account/activate/activate.service';
-import LoginService from '@/account/login.service';
+import LoginModalService from '@/account/login-modal.service';
 
 const localVue = createLocalVue();
 const mockedAxios: any = axios;
@@ -32,7 +32,7 @@ describe('Activate Component', () => {
       localVue,
       provide: {
         activateService: () => new ActivateService(),
-        loginService: () => new LoginService()
+        loginModalService: () => new LoginModalService()
       }
     });
     activate = wrapper.vm;

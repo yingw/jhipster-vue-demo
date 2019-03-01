@@ -2,7 +2,7 @@
     <div>
         <h2 id="page-heading">
             <span v-text="$t('demoApp.region.home.title')" id="region-heading">Regions</span>
-            <router-link :to="{name: 'RegionCreate'}" tag="button" id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-region">
+            <router-link to="/entity/region/new" tag="button" id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-region">
                 <font-awesome-icon icon="plus"></font-awesome-icon>
                 <span  v-text="$t('demoApp.region.home.createLabel')">
                     Create new Region
@@ -22,17 +22,15 @@
                 <thead>
                 <tr>
                     <th><span v-text="$t('global.field.id')">ID</span></th>
-                    <th><span v-text="$t('demoApp.region.regionName')">Region Name</span></th>
+                        <th><span v-text="$t('demoApp.region.regionName')">Region Name</span></th>
                     <th></th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr v-for="region in regions"
                     :key="region.id">
-                    <td>
-                        <router-link :to="{name: 'RegionView', params: {regionId: region.id}}">{{region.id}}</router-link>
-                    </td>
-                    <td>{{region.regionName}}</td>
+                    <td><router-link :to="{name: 'RegionView', params: {regionId: region.id}}">{{region.id}}</router-link></td>
+                            <td>{{region.regionName}}</td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <router-link :to="{name: 'RegionView', params: {regionId: region.id}}" tag="button" class="btn btn-info btn-sm">

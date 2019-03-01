@@ -12,7 +12,7 @@
       <div class="col-md-4">
         <h4 v-text="$t('metrics.jvm.memory.title')">Memory</h4>
         <div>
-          <div v-for="(entry, key) of metrics.jvm" :key="key">
+          <div v-for="(entry, key) of metrics.jvm">
             <span v-if="entry.max !== -1">
               <span>{{key}}</span> ({{formatNumber1(entry.used / 1048576)}}M / {{formatNumber1(entry.max / 1048576)}}M)
             </span>
@@ -106,9 +106,9 @@
     </div>
 
     <h3 v-text="$t('metrics.jvm.gc.title')">Garbage collections</h3>
-    <div class="row" v-if="!updatingMetrics && isObjectExisting(metrics, 'garbageCollector')">
+    <div class="row">
       <div class="col-md-4">
-        <div>
+        <div v-if="!updatingMetrics && metrics.garbageCollector">
           <span>
             GC Live Data Size/GC Max Data Size
             ({{formatNumber1(metrics.garbageCollector['jvm.gc.live.data.size'] / 1048576)}}M
@@ -122,7 +122,7 @@
         </div>
       </div>
       <div class="col-md-4">
-        <div>
+        <div v-if="!updatingMetrics && metrics.garbageCollector">
           <span>
             GC Memory Promoted/GC Memory Allocated
             ({{formatNumber1(metrics.garbageCollector['jvm.gc.memory.promoted'] / 1048576)}}M
@@ -136,16 +136,16 @@
         </div>
       </div>
       <div class="col-md-4">
-        <div class="row">
+        <div class="row" v-if="!updatingMetrics && metrics.garbageCollector">
           <div class="col-md-9">Classes loaded</div>
           <div class="col-md-3 text-right">{{metrics.garbageCollector.classesLoaded}}</div>
         </div>
-        <div class="row">
+        <div class="row" v-if="!updatingMetrics && metrics.garbageCollector">
           <div class="col-md-9">Classes unloaded</div>
           <div class="col-md-3 text-right">{{metrics.garbageCollector.classesUnloaded}}</div>
         </div>
       </div>
-      <div class="table-responsive">
+      <div class="table-responsive" v-if="!updatingMetrics && metrics.garbageCollector">
         <table class="table table-striped">
           <thead>
           <tr>
@@ -178,7 +178,7 @@
     </div>
 
     <h3 v-text="$t('metrics.jvm.http.title')">HTTP requests (time in millisecond)</h3>
-    <table class="table table-striped" v-if="!updatingMetrics && isObjectExisting(metrics, 'http.server.requests')">
+    <table class="table table-striped" v-if="!updatingMetrics">
       <thead>
       <tr>
         <th v-text="$t('metrics.jvm.http.table.code')">Code</th>
@@ -188,7 +188,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr v-for="(entry, key) of metrics['http.server.requests']['percode']" :key="key">
+      <tr v-for="(entry, key) of metrics['http.server.requests']['percode']">
         <td>{{key}}</td>
         <td>
           <b-progress variant="success" animated :max="metrics['http.server.requests']['all'].count" striped >
@@ -216,7 +216,7 @@
         </thead>
         <tbody>
         <template v-for="(entry, entryKey) of metrics.endpointsRequests">
-          <tr v-for="(method, methodKey) of entry" :key="entryKey + '-' + methodKey">
+          <tr v-for="(method, methodKey) of entry">
             <td>{{methodKey}}</td>
             <td>{{entryKey}}</td>
             <td class="text-right">{{method.count}}</td>
@@ -228,7 +228,7 @@
     </div>
 
     <h3 v-text="$t('metrics.cache.title')">Cache statistics</h3>
-    <div class="table-responsive" v-if="!updatingMetrics && isObjectExisting(metrics, 'cache')">
+    <div class="table-responsive" v-if="!updatingMetrics">
       <table class="table table-striped">
         <thead>
         <tr>
@@ -244,7 +244,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr v-for="(entry, key) of metrics.cache" :key="key">
+        <tr v-for="(entry, key) of metrics.cache">
           <td>{{key}}</td>
           <td class="text-right">{{entry['cache.gets.hit']}}</td>
           <td class="text-right">{{entry['cache.gets.miss']}}</td>
@@ -266,7 +266,7 @@
     </div>
 
     <h3 v-text="$t('metrics.datasource.title')">DataSource statistics (time in millisecond)</h3>
-    <div class="table-responsive" v-if="!updatingMetrics && isObjectExistingAndNotEmpty(metrics, 'databases')">
+    <div class="table-responsive" v-if="!updatingMetrics">
       <table class="table table-striped">
         <thead>
         <tr>

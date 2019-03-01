@@ -2,22 +2,18 @@ import { shallowMount, createLocalVue, Wrapper } from '@vue/test-utils';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
-import AlertService from '@/shared/alert/alert.service';
 import * as config from '@/shared/config/config';
 import UserManagementEdit from '@/admin/user-management/user-management-edit.vue';
 import UserManagementEditClass from '@/admin/user-management/user-management-edit.component';
 import UserManagementService from '@/admin/user-management/user-management.service';
-import VueRouter from 'vue-router';
 
 const localVue = createLocalVue();
-localVue.use(VueRouter);
 const mockedAxios: any = axios;
 
 config.initVueApp(localVue);
 const i18n = config.initI18N(localVue);
 const store = config.initVueXStore(localVue);
 localVue.component('font-awesome-icon', FontAwesomeIcon);
-localVue.component('b-alert', {});
 
 jest.mock('axios', () => ({
   get: jest.fn(),
@@ -30,16 +26,11 @@ describe('UserManagementEdit Component', () => {
   let userManagementEdit: UserManagementEditClass;
 
   beforeEach(() => {
-    const router = new VueRouter();
     wrapper = shallowMount<UserManagementEditClass>(UserManagementEdit, {
       store,
-      router,
       i18n,
       localVue,
-      provide: {
-        alertService: () => new AlertService(store),
-        userService: () => new UserManagementService()
-      }
+      provide: { userService: () => new UserManagementService() }
     });
     userManagementEdit = wrapper.vm;
   });
@@ -79,7 +70,7 @@ describe('UserManagementEdit Component', () => {
   describe('save', () => {
     it('Should call update service on save for existing user', async () => {
       // GIVEN
-      mockedAxios.put.mockReturnValue(Promise.resolve({ headers: {} }));
+      mockedAxios.put.mockReturnValue(Promise.resolve({}));
       userManagementEdit.userAccount = { id: 1, authorities: [] };
 
       // WHEN
@@ -93,7 +84,7 @@ describe('UserManagementEdit Component', () => {
 
     it('Should call create service on save for new user', async () => {
       // GIVEN
-      mockedAxios.post.mockReturnValue(Promise.resolve({ headers: {} }));
+      mockedAxios.post.mockReturnValue(Promise.resolve({}));
       userManagementEdit.userAccount = { authorities: [] };
 
       // WHEN

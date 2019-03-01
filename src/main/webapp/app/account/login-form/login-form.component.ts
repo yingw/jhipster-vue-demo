@@ -10,11 +10,12 @@ import AccountService from '@/account/account.service';
   }
 })
 export default class LoginForm extends Vue {
-  @Inject('accountService') private accountService: () => AccountService;
   public authenticationError = null;
   public login = null;
   public password = null;
   public rememberMe: boolean = null;
+
+  @Inject('accountService') private accountService: () => AccountService;
 
   public doLogin(): void {
     const data = { username: this.login, password: this.password, rememberMe: this.rememberMe };
