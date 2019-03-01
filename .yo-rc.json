@@ -1,0 +1,61 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "cn.wilmar.demo",
+      "nativeLanguage": "zh-cn"
+    },
+    "jhipsterVersion": "5.8.1",
+    "applicationType": "monolith",
+    "baseName": "Demo",
+    "packageName": "cn.wilmar.demo",
+    "packageFolder": "cn/wilmar/demo",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "ehcache",
+    "enableHibernateCache": true,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "h2Disk",
+    "prodDatabaseType": "mysql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "NTY1MDE0M2EyZjRjNDcwZmE0MDdjMWVlNDY4ZDk0NGU1NzI2MmQyZjU1ZWM4OGVjYzNkYjJhZTU1NjJjMmVhMTFiNzNlNTJlNTBlNzcwOTgwNWM1YWI1MDQxMjQ0ZDFjNmM3MzRkOTk3NWEwZTY3Yzk0OTIzNDFhNDc2Y2Y2ZTQ=",
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [
+      {
+        "name": "generator-jhipster-vuejs",
+        "version": "1.0.0-beta.1"
+      }
+    ],
+    "enableTranslation": true,
+    "clientPackageManager": "npm",
+    "nativeLanguage": "zh-cn",
+    "languages": [
+      "zh-cn",
+      "en"
+    ],
+    "blueprint": "generator-jhipster-vuejs",
+    "blueprintVersion": "1.0.0-beta.1"
+  },
+  "generator-jhipster-vuejs": {
+    "clientTheme": "sandstone",
+    "clientThemeVariant": "primary",
+    "jhipsterVersion": "5.8.1",
+    "applicationType": "monolith",
+    "baseName": "Demo",
+    "clientFramework": "vue",
+    "useSass": true,
+    "clientPackageManager": "npm",
+    "enableTranslation": true,
+    "languages": [
+      "zh-cn",
+      "en"
+    ]
+  }
+}
