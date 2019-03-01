@@ -6,7 +6,7 @@ import * as config from '@/shared/config/config';
 import Register from '@/account/register/register.vue';
 import RegisterClass from '@/account/register/register.component';
 import RegisterService from '@/account/register/register.service';
-import LoginService from '@/account/login.service';
+import LoginModalService from '@/account/login-modal.service';
 
 const localVue = createLocalVue();
 const mockedAxios: any = axios;
@@ -23,7 +23,7 @@ jest.mock('axios', () => ({
 describe('Register Component', () => {
   let wrapper: Wrapper<RegisterClass>;
   let register: RegisterClass;
-  const filledRegisterAccount = { email: 'jhi@pster.net', langKey: 'zh-cn', login: 'jhi', password: 'jhipster' };
+  const filledRegisterAccount = { email: 'jhi@pster.net', langKey: null, login: 'jhi', password: 'jhipster' };
 
   beforeEach(() => {
     mockedAxios.get.mockReset();
@@ -36,7 +36,7 @@ describe('Register Component', () => {
       localVue,
       provide: {
         registerService: () => new RegisterService(),
-        loginService: () => new LoginService()
+        loginModalService: () => new LoginModalService()
       }
     });
     register = wrapper.vm;
@@ -84,7 +84,7 @@ describe('Register Component', () => {
 
     expect(mockedAxios.post).toHaveBeenCalledWith('api/register', {
       email: 'jhi@pster.net',
-      langKey: 'zh-cn',
+      langKey: 'en',
       login: 'jhi',
       password: 'jhipster'
     });
@@ -105,7 +105,7 @@ describe('Register Component', () => {
 
     expect(mockedAxios.post).toHaveBeenCalledWith('api/register', {
       email: 'jhi@pster.net',
-      langKey: 'zh-cn',
+      langKey: 'en',
       login: 'jhi',
       password: 'jhipster'
     });
@@ -126,7 +126,7 @@ describe('Register Component', () => {
 
     expect(mockedAxios.post).toHaveBeenCalledWith('api/register', {
       email: 'jhi@pster.net',
-      langKey: 'zh-cn',
+      langKey: 'en',
       login: 'jhi',
       password: 'jhipster'
     });
@@ -147,7 +147,7 @@ describe('Register Component', () => {
 
     expect(mockedAxios.post).toHaveBeenCalledWith('api/register', {
       email: 'jhi@pster.net',
-      langKey: 'zh-cn',
+      langKey: 'en',
       login: 'jhi',
       password: 'jhipster'
     });

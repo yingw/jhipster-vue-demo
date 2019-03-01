@@ -27,7 +27,6 @@ export default class CountryUpdate extends Vue {
 
   @Inject('regionService')
   private regionService: () => RegionService;
-
   public regions: IRegion[] = [];
   public isSaving = false;
 

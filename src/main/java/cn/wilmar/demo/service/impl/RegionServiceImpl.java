@@ -72,6 +72,7 @@ public class RegionServiceImpl implements RegionService {
      */
     @Override
     public void delete(Long id) {
-        log.debug("Request to delete Region : {}", id);        regionRepository.deleteById(id);
+        log.debug("Request to delete Region : {}", id);
+        regionRepository.deleteById(id);
     }
 }

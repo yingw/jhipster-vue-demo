@@ -26,13 +26,6 @@ jest.mock('axios', () => ({
   delete: jest.fn()
 }));
 
-const bModalStub = {
-  render: () => {},
-  methods: {
-    hide: () => {}
-  }
-};
-
 describe('Component Tests', () => {
   describe('Task Management Component', () => {
     let wrapper: Wrapper<TaskClass>;
@@ -40,13 +33,13 @@ describe('Component Tests', () => {
 
     beforeEach(() => {
       mockedAxios.get.mockReset();
-      mockedAxios.get.mockReturnValue(Promise.resolve({ headers: {} }));
+      mockedAxios.get.mockReturnValue(Promise.resolve({}));
 
       wrapper = shallowMount<TaskClass>(TaskComponent, {
         store,
         i18n,
         localVue,
-        stubs: { bModal: bModalStub as any },
+        stubs: { bModal: true },
         provide: {
           alertService: () => new AlertService(store),
           taskService: () => new TaskService()
@@ -61,7 +54,7 @@ describe('Component Tests', () => {
 
     it('Should call load all on init', async () => {
       // GIVEN
-      mockedAxios.get.mockReturnValue(Promise.resolve({ headers: {}, data: [{ id: 123 }] }));
+      mockedAxios.get.mockReturnValue(Promise.resolve({ data: [{ id: 123 }] }));
 
       // WHEN
       comp.retrieveAllTasks();

@@ -2,7 +2,7 @@
     <div>
         <h2 id="page-heading">
             <span v-text="$t('demoApp.country.home.title')" id="country-heading">Countries</span>
-            <router-link :to="{name: 'CountryCreate'}" tag="button" id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-country">
+            <router-link to="/entity/country/new" tag="button" id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-country">
                 <font-awesome-icon icon="plus"></font-awesome-icon>
                 <span  v-text="$t('demoApp.country.home.createLabel')">
                     Create new Country
@@ -22,23 +22,21 @@
                 <thead>
                 <tr>
                     <th><span v-text="$t('global.field.id')">ID</span></th>
-                    <th><span v-text="$t('demoApp.country.countryName')">Country Name</span></th>
-                    <th><span v-text="$t('demoApp.country.region')">Region</span></th>
+                        <th><span v-text="$t('demoApp.country.countryName')">Country Name</span></th>
+                            <th><span v-text="$t('demoApp.country.region')">Region</span></th>
                     <th></th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr v-for="country in countries"
                     :key="country.id">
-                    <td>
-                        <router-link :to="{name: 'CountryView', params: {countryId: country.id}}">{{country.id}}</router-link>
-                    </td>
-                    <td>{{country.countryName}}</td>
-                    <td>
-                        <div v-if="country.region">
-                            <router-link :to="{name: 'RegionView', params: {regionId: country.region.id}}">{{country.region.id}}</router-link>
-                        </div>
-                    </td>
+                    <td><router-link :to="{name: 'CountryView', params: {countryId: country.id}}">{{country.id}}</router-link></td>
+                            <td>{{country.countryName}}</td>
+                        <td>
+                                        <div v-if="country.region">
+                                            <router-link :to="'../entity/region/' + country.region.id + '/view'" >{{country.region.id}}</router-link>
+                                        </div>
+                        </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <router-link :to="{name: 'CountryView', params: {countryId: country.id}}" tag="button" class="btn btn-info btn-sm">

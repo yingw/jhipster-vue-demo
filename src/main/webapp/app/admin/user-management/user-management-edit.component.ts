@@ -2,7 +2,6 @@ import { email, maxLength, minLength, required } from 'vuelidate/lib/validators'
 import { Component, Inject, Vue } from 'vue-property-decorator';
 import UserManagementService from './user-management.service';
 import { IUser, User } from '@/shared/model/user.model';
-import AlertService from '@/shared/alert/alert.service';
 
 function loginValidator(value) {
   if (typeof value === 'undefined' || value === null || value === '') {
@@ -38,8 +37,6 @@ const validations: any = {
   validations
 })
 export default class JhiUserManagementEdit extends Vue {
-  @Inject('alertService')
-  private alertService: () => AlertService;
   @Inject('userService')
   private userManagementService: () => UserManagementService;
   public userAccount: IUser;
@@ -87,26 +84,16 @@ export default class JhiUserManagementEdit extends Vue {
     if (this.userAccount.id) {
       this.userManagementService()
         .update(this.userAccount)
-        .then(res => {
-          this.returnToList();
-          this.alertService().showAlert(this.getMessageFromHeader(res), 'info');
-        });
+        .then(() => this.returnToList());
     } else {
       this.userManagementService()
         .create(this.userAccount)
-        .then(res => {
-          this.returnToList();
-          this.alertService().showAlert(this.getMessageFromHeader(res), 'success');
-        });
+        .then(() => this.returnToList());
     }
   }
 
   private returnToList(): void {
     this.isSaving = false;
     (<any>this).$router.go(-1);
-  }
-
-  private getMessageFromHeader(res: any): any {
-    return this.$t(res.headers['x-demoapp-alert'], { param: res.headers['x-demoapp-params'] });
   }
 }

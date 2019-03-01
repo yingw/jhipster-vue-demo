@@ -4,23 +4,27 @@
             <form name="editForm" role="form" novalidate v-on:submit.prevent="save()" >
                 <h2 id="demoApp.country.home.createOrEditLabel" v-text="$t('demoApp.country.home.createOrEditLabel')">Create or edit a Country</h2>
                 <div>
+                    <!--<jhi-alert-error></jhi-alert-error>-->
                     <div class="form-group" v-if="country.id">
                         <label for="id" v-text="$t('global.field.id')">ID</label>
                         <input type="text" class="form-control" id="id" name="id"
                                v-model="country.id" readonly />
                     </div>
+
                     <div class="form-group">
                         <label class="form-control-label" v-text="$t('demoApp.country.countryName')" for="country-countryName">Country Name</label>
                         <input type="text" class="form-control" name="countryName" id="country-countryName"
                             :class="{'valid': !$v.country.countryName.$invalid, 'invalid': $v.country.countryName.$invalid }" v-model="$v.country.countryName.$model" />
                     </div>
-                    <div class="form-group">
-                        <label class="form-control-label" v-text="$t('demoApp.country.region')" for="country-region">Region</label>
-                        <select class="form-control" id="country-region" name="region" v-model="country.region">
-                            <option v-bind:value="null"></option>
-                            <option v-bind:value="country.region && regionOption.id === country.region.id ? country.region : regionOption" v-for="regionOption in regions" :key="regionOption.id">{{regionOption.id}}</option>
-                        </select>
-                    </div>
+
+                        <div class="form-group">
+                            <label class="form-control-label" v-text="$t('demoApp.country.region')" for="country-region">Region</label>
+                                <select class="form-control" id="country-region" name="region" v-model="country.region">
+                                    <option value="null"></option>
+                                    <option v-bind:value="country.region && regionOption.id === country.region.id ? country.region : regionOption" v-for="regionOption in regions">{{regionOption.id}}</option>
+                                </select>
+                        </div>
+
                 </div>
                 <div>
                     <button type="button" id="cancel-save" class="btn btn-secondary" v-on:click="previousState()">

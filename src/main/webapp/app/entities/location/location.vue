@@ -2,7 +2,7 @@
     <div>
         <h2 id="page-heading">
             <span v-text="$t('demoApp.location.home.title')" id="location-heading">Locations</span>
-            <router-link :to="{name: 'LocationCreate'}" tag="button" id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-location">
+            <router-link to="/entity/location/new" tag="button" id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-location">
                 <font-awesome-icon icon="plus"></font-awesome-icon>
                 <span  v-text="$t('demoApp.location.home.createLabel')">
                     Create new Location
@@ -22,29 +22,27 @@
                 <thead>
                 <tr>
                     <th><span v-text="$t('global.field.id')">ID</span></th>
-                    <th><span v-text="$t('demoApp.location.streetAddress')">Street Address</span></th>
-                    <th><span v-text="$t('demoApp.location.postalCode')">Postal Code</span></th>
-                    <th><span v-text="$t('demoApp.location.city')">City</span></th>
-                    <th><span v-text="$t('demoApp.location.stateProvince')">State Province</span></th>
-                    <th><span v-text="$t('demoApp.location.country')">Country</span></th>
+                        <th><span v-text="$t('demoApp.location.streetAddress')">Street Address</span></th>
+                        <th><span v-text="$t('demoApp.location.postalCode')">Postal Code</span></th>
+                        <th><span v-text="$t('demoApp.location.city')">City</span></th>
+                        <th><span v-text="$t('demoApp.location.stateProvince')">State Province</span></th>
+                            <th><span v-text="$t('demoApp.location.country')">Country</span></th>
                     <th></th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr v-for="location in locations"
                     :key="location.id">
-                    <td>
-                        <router-link :to="{name: 'LocationView', params: {locationId: location.id}}">{{location.id}}</router-link>
-                    </td>
-                    <td>{{location.streetAddress}}</td>
-                    <td>{{location.postalCode}}</td>
-                    <td>{{location.city}}</td>
-                    <td>{{location.stateProvince}}</td>
-                    <td>
-                        <div v-if="location.country">
-                            <router-link :to="{name: 'CountryView', params: {countryId: location.country.id}}">{{location.country.id}}</router-link>
-                        </div>
-                    </td>
+                    <td><router-link :to="{name: 'LocationView', params: {locationId: location.id}}">{{location.id}}</router-link></td>
+                            <td>{{location.streetAddress}}</td>
+                            <td>{{location.postalCode}}</td>
+                            <td>{{location.city}}</td>
+                            <td>{{location.stateProvince}}</td>
+                        <td>
+                                        <div v-if="location.country">
+                                            <router-link :to="'../entity/country/' + location.country.id + '/view'" >{{location.country.id}}</router-link>
+                                        </div>
+                        </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <router-link :to="{name: 'LocationView', params: {locationId: location.id}}" tag="button" class="btn btn-info btn-sm">

@@ -2,7 +2,6 @@ import { shallowMount, createLocalVue, Wrapper } from '@vue/test-utils';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
-import AlertService from '@/shared/alert/alert.service';
 import * as config from '@/shared/config/config';
 import UserManagement from '@/admin/user-management/user-management.vue';
 import UserManagementClass from '@/admin/user-management/user-management.component';
@@ -15,7 +14,6 @@ config.initVueApp(localVue);
 const i18n = config.initI18N(localVue);
 const store = config.initVueXStore(localVue);
 localVue.component('font-awesome-icon', FontAwesomeIcon);
-localVue.component('b-alert', {});
 localVue.component('router-link', {});
 localVue.directive('b-modal', {});
 
@@ -51,7 +49,6 @@ describe('UserManagement Component', () => {
         bModal: true
       },
       provide: {
-        alertService: () => new AlertService(store),
         userService: () => new UserManagementService()
       }
     });
@@ -91,7 +88,7 @@ describe('UserManagement Component', () => {
   describe('confirmDelete', () => {
     it('Should call delete service on confirmDelete', async () => {
       // GIVEN
-      mockedAxios.delete.mockReturnValue(Promise.resolve({ headers: {} }));
+      mockedAxios.delete.mockReturnValue(Promise.resolve({}));
 
       // WHEN
       userManagement.prepareRemove({ login: 'test' });

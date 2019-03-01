@@ -4,16 +4,20 @@
             <form name="editForm" role="form" novalidate v-on:submit.prevent="save()" >
                 <h2 id="demoApp.region.home.createOrEditLabel" v-text="$t('demoApp.region.home.createOrEditLabel')">Create or edit a Region</h2>
                 <div>
+                    <!--<jhi-alert-error></jhi-alert-error>-->
                     <div class="form-group" v-if="region.id">
                         <label for="id" v-text="$t('global.field.id')">ID</label>
                         <input type="text" class="form-control" id="id" name="id"
                                v-model="region.id" readonly />
                     </div>
+
                     <div class="form-group">
                         <label class="form-control-label" v-text="$t('demoApp.region.regionName')" for="region-regionName">Region Name</label>
                         <input type="text" class="form-control" name="regionName" id="region-regionName"
                             :class="{'valid': !$v.region.regionName.$invalid, 'invalid': $v.region.regionName.$invalid }" v-model="$v.region.regionName.$model" />
                     </div>
+
+
                 </div>
                 <div>
                     <button type="button" id="cancel-save" class="btn btn-secondary" v-on:click="previousState()">

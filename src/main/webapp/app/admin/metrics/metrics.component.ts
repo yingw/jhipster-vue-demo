@@ -113,12 +113,4 @@ export default class JhiMetrics extends Vue {
     }
     return time_string;
   }
-
-  public isObjectExisting(metrics: any, key: string): boolean {
-    return metrics && metrics[key];
-  }
-
-  public isObjectExistingAndNotEmpty(metrics: any, key: string): boolean {
-    return this.isObjectExisting(metrics, key) && JSON.stringify(metrics[key]) !== '{}';
-  }
 }

@@ -26,13 +26,6 @@ jest.mock('axios', () => ({
   delete: jest.fn()
 }));
 
-const bModalStub = {
-  render: () => {},
-  methods: {
-    hide: () => {}
-  }
-};
-
 describe('Component Tests', () => {
   describe('Region Management Component', () => {
     let wrapper: Wrapper<RegionClass>;
@@ -40,13 +33,13 @@ describe('Component Tests', () => {
 
     beforeEach(() => {
       mockedAxios.get.mockReset();
-      mockedAxios.get.mockReturnValue(Promise.resolve({ headers: {} }));
+      mockedAxios.get.mockReturnValue(Promise.resolve({}));
 
       wrapper = shallowMount<RegionClass>(RegionComponent, {
         store,
         i18n,
         localVue,
-        stubs: { bModal: bModalStub as any },
+        stubs: { bModal: true },
         provide: {
           alertService: () => new AlertService(store),
           regionService: () => new RegionService()
@@ -61,7 +54,7 @@ describe('Component Tests', () => {
 
     it('Should call load all on init', async () => {
       // GIVEN
-      mockedAxios.get.mockReturnValue(Promise.resolve({ headers: {}, data: [{ id: 123 }] }));
+      mockedAxios.get.mockReturnValue(Promise.resolve({ data: [{ id: 123 }] }));
 
       // WHEN
       comp.retrieveAllRegions();

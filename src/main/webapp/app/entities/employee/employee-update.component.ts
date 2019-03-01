@@ -39,14 +39,11 @@ export default class EmployeeUpdate extends Vue {
 
   @Inject('departmentService')
   private departmentService: () => DepartmentService;
-
   public departments: IDepartment[] = [];
 
   @Inject('jobService')
   private jobService: () => JobService;
-
   public jobs: IJob[] = [];
-
   public employees: IEmployee[] = [];
   public isSaving = false;
 
@@ -110,6 +107,10 @@ export default class EmployeeUpdate extends Vue {
       .find(employeeId)
       .then(res => {
         this.employee = res;
+
+        if (this.employee.hireDate) {
+          this.employee.hireDate = parse(this.employee.hireDate.toString(), INSTANT_FORMAT, new Date());
+        }
       });
   }
 

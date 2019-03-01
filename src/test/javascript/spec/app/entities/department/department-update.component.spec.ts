@@ -9,10 +9,6 @@ import DepartmentUpdateComponent from '@/entities/department/department-update.v
 import DepartmentClass from '@/entities/department/department-update.component';
 import DepartmentService from '@/entities/department/department.service';
 
-import LocationService from '@/entities/location/location.service';
-
-import EmployeeService from '@/entities/employee/employee.service';
-
 const localVue = createLocalVue();
 const mockedAxios: any = axios;
 
@@ -44,11 +40,7 @@ describe('Component Tests', () => {
         router,
         provide: {
           alertService: () => new AlertService(store),
-          departmentService: () => new DepartmentService(),
-
-          locationService: () => new LocationService(),
-
-          employeeService: () => new EmployeeService()
+          departmentService: () => new DepartmentService()
         }
       });
       comp = wrapper.vm;

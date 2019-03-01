@@ -26,13 +26,6 @@ jest.mock('axios', () => ({
   delete: jest.fn()
 }));
 
-const bModalStub = {
-  render: () => {},
-  methods: {
-    hide: () => {}
-  }
-};
-
 describe('Component Tests', () => {
   describe('JobHistory Management Component', () => {
     let wrapper: Wrapper<JobHistoryClass>;
@@ -40,13 +33,13 @@ describe('Component Tests', () => {
 
     beforeEach(() => {
       mockedAxios.get.mockReset();
-      mockedAxios.get.mockReturnValue(Promise.resolve({ headers: {} }));
+      mockedAxios.get.mockReturnValue(Promise.resolve({}));
 
       wrapper = shallowMount<JobHistoryClass>(JobHistoryComponent, {
         store,
         i18n,
         localVue,
-        stubs: { jhiItemCount: true, bPagination: true, bModal: bModalStub as any },
+        stubs: { jhiItemCount: true, bPagination: true, bModal: true },
         provide: {
           alertService: () => new AlertService(store),
           jobHistoryService: () => new JobHistoryService()
@@ -61,7 +54,7 @@ describe('Component Tests', () => {
 
     it('Should call load all on init', async () => {
       // GIVEN
-      mockedAxios.get.mockReturnValue(Promise.resolve({ headers: {}, data: [{ id: 123 }] }));
+      mockedAxios.get.mockReturnValue(Promise.resolve({ data: [{ id: 123 }] }));
 
       // WHEN
       comp.retrieveAllJobHistorys();
@@ -74,7 +67,7 @@ describe('Component Tests', () => {
 
     it('should load a page', async () => {
       // GIVEN
-      mockedAxios.get.mockReturnValue(Promise.resolve({ headers: {}, data: [{ id: 123 }] }));
+      mockedAxios.get.mockReturnValue(Promise.resolve({ data: [{ id: 123 }] }));
 
       // WHEN
       comp.loadPage(1);
@@ -88,7 +81,7 @@ describe('Component Tests', () => {
     it('should re-initialize the page', async () => {
       // GIVEN
       mockedAxios.get.mockReset();
-      mockedAxios.get.mockReturnValue(Promise.resolve({ headers: {}, data: [{ id: 123 }] }));
+      mockedAxios.get.mockReturnValue(Promise.resolve({ data: [{ id: 123 }] }));
 
       // WHEN
       comp.loadPage(2);

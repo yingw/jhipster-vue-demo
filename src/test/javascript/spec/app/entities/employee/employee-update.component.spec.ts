@@ -9,10 +9,6 @@ import EmployeeUpdateComponent from '@/entities/employee/employee-update.vue';
 import EmployeeClass from '@/entities/employee/employee-update.component';
 import EmployeeService from '@/entities/employee/employee.service';
 
-import DepartmentService from '@/entities/department/department.service';
-
-import JobService from '@/entities/job/job.service';
-
 const localVue = createLocalVue();
 const mockedAxios: any = axios;
 
@@ -44,11 +40,7 @@ describe('Component Tests', () => {
         router,
         provide: {
           alertService: () => new AlertService(store),
-          employeeService: () => new EmployeeService(),
-
-          departmentService: () => new DepartmentService(),
-
-          jobService: () => new JobService()
+          employeeService: () => new EmployeeService()
         }
       });
       comp = wrapper.vm;

@@ -13,5 +13,10 @@ module.exports = {
   testResultsProcessor: 'jest-sonar-reporter',
   testMatch: ['<rootDir>/src/test/javascript/spec/**/+(*.)+(spec.ts)'],
   snapshotSerializers: ['<rootDir>/node_modules/jest-serializer-vue'],
-  rootDir: '../../../'
+  rootDir: '../../../',
+  globals: {
+    'ts-jest': {
+      tsConfigFile: './tsconfig.test.json'
+    }
+  }
 };

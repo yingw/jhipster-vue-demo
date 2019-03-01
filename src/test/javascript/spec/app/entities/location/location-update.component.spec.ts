@@ -9,8 +9,6 @@ import LocationUpdateComponent from '@/entities/location/location-update.vue';
 import LocationClass from '@/entities/location/location-update.component';
 import LocationService from '@/entities/location/location.service';
 
-import CountryService from '@/entities/country/country.service';
-
 const localVue = createLocalVue();
 const mockedAxios: any = axios;
 
@@ -42,9 +40,7 @@ describe('Component Tests', () => {
         router,
         provide: {
           alertService: () => new AlertService(store),
-          locationService: () => new LocationService(),
-
-          countryService: () => new CountryService()
+          locationService: () => new LocationService()
         }
       });
       comp = wrapper.vm;

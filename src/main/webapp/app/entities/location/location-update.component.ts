@@ -30,7 +30,6 @@ export default class LocationUpdate extends Vue {
 
   @Inject('countryService')
   private countryService: () => CountryService;
-
   public countries: ICountry[] = [];
   public isSaving = false;
 

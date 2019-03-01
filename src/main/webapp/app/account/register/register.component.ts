@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import { Component, Inject } from 'vue-property-decorator';
 import { required, minLength, maxLength, helpers, email } from 'vuelidate/lib/validators';
-import LoginService from '@/account/login.service';
+import LoginModalService from '@/account/login-modal.service';
 import RegisterService from '@/account/register/register.service';
 import { EMAIL_ALREADY_USED_TYPE, LOGIN_ALREADY_USED_TYPE } from '@/constants';
 
@@ -38,8 +38,8 @@ const validations: any = {
 export default class Register extends Vue {
   @Inject('registerService')
   private registerService: () => RegisterService;
-  @Inject('loginService')
-  private loginService: () => LoginService;
+  @Inject('loginModalService')
+  private loginModalService: () => LoginModalService;
   public registerAccount: any = {
     login: undefined,
     email: undefined,
@@ -80,6 +80,6 @@ export default class Register extends Vue {
   }
 
   public openLogin(): void {
-    this.loginService().openLogin((<any>this).$root);
+    this.loginModalService().openLogin((<any>this).$root);
   }
 }

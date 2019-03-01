@@ -9,12 +9,6 @@ import JobHistoryUpdateComponent from '@/entities/job-history/job-history-update
 import JobHistoryClass from '@/entities/job-history/job-history-update.component';
 import JobHistoryService from '@/entities/job-history/job-history.service';
 
-import JobService from '@/entities/job/job.service';
-
-import DepartmentService from '@/entities/department/department.service';
-
-import EmployeeService from '@/entities/employee/employee.service';
-
 const localVue = createLocalVue();
 const mockedAxios: any = axios;
 
@@ -46,13 +40,7 @@ describe('Component Tests', () => {
         router,
         provide: {
           alertService: () => new AlertService(store),
-          jobHistoryService: () => new JobHistoryService(),
-
-          jobService: () => new JobService(),
-
-          departmentService: () => new DepartmentService(),
-
-          employeeService: () => new EmployeeService()
+          jobHistoryService: () => new JobHistoryService()
         }
       });
       comp = wrapper.vm;

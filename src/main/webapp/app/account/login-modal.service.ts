@@ -1,7 +1,6 @@
 import Vue from 'vue';
-import axios, { AxiosPromise } from 'axios';
 
-export default class LoginService {
+export default class LoginModalService {
   public openLogin(instance: Vue): void {
     instance.$emit('bv::show::modal', 'login-page');
   }

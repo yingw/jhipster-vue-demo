@@ -72,6 +72,7 @@ public class TaskServiceImpl implements TaskService {
      */
     @Override
     public void delete(Long id) {
-        log.debug("Request to delete Task : {}", id);        taskRepository.deleteById(id);
+        log.debug("Request to delete Task : {}", id);
+        taskRepository.deleteById(id);
     }
 }

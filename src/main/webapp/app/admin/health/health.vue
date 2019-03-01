@@ -16,7 +16,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="health of healthData" :key="health.name">
+                <tr v-for="health of healthData">
                     <td><span v-text="$t('health.indicator.' + baseName(health.name))"/> {{subSystemName(health.name)}}</td>
                     <td class="text-center">
                         <span class="badge" :class="getBadgeClass(health.status)" v-text="$t('health.status.' + health.status)">

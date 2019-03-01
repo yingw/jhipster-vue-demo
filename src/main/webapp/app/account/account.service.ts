@@ -16,7 +16,7 @@ export default class AccountService {
     this.retrieveProfiles();
   }
 
-  public retrieveProfiles(): void {
+  public retrieveProfiles(): any {
     axios.get('management/info').then(res => {
       if (res.data && res.data.activeProfiles && res.data.activeProfiles.indexOf(res.data['display-ribbon-on-profiles']) > -1) {
         this.store.commit('setRibbonOnProfiles', res.data['display-ribbon-on-profiles']);
@@ -25,7 +25,7 @@ export default class AccountService {
     });
   }
 
-  public retrieveAccount(): void {
+  public retrieveAccount(): any {
     this.store.commit('authenticate');
     axios
       .get('api/account')
